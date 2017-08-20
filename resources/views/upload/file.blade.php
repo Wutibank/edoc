@@ -13,15 +13,14 @@
 <p style="text-align:center;"> File Upload</p>
 <form action="{{route('upload.file')}}" enctype="multipart/form-data" method="post">
 {{csrf_field()}}
-<input type="file" name="file" id="">
+<input type="file" name="file" id="" >
+
 <br>
 เลือกหมวดหมู่
-
 <select class="form-control form-control-sm" name="selection-cate">
-  <option value="none" selected>none</option>
-  <option value="A">Cal 1</option>
-  <option value="B">Cal 2</option>
-  <option value="C">Cal 3</option>
+    @foreach($category as  $value )
+     <option value="{{ $value }}">{{ $value }}</option>
+    @endforeach
 </select>
 
 

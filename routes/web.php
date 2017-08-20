@@ -30,3 +30,5 @@ Route::post('file','FileController@storefile')->name('upload.file');
 
 Route::get('category','CategoryController@ShowCategory')->name('category.cate_home');
 Route::post('category','CategoryController@StoreCategory')->name('category.cate_home');
+Route::get('catedel', 'CategoryController@IndexCategory')->name('category.catedel');
+Route::post('catedel', 'CategoryController@DeleteCategory')->name('category.catedel');

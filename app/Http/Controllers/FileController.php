@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\File;
+use App\Category;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
     //
     public function index(){
-        $category = DB::table('categories')->pluck('id','name');
+        //$category = DB::table('categories')->pluck('id','name');
        // $Category = categories::all()->pluck('name', 'id');
         //return 'yes';
-        return view('upload.file',['category'=> $category]);
+        $categories = category::pluck('name','id')->toArray();
+       // return view('upload.file');
+    return view('upload.file',['category'=> $categories]);
     }
 
     public function showUploadForm(){

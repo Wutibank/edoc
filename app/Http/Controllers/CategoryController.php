@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     //
+    public function IndexCategory(){
+         $categories = category::pluck('name')->toArray();
+         $categoriesID = category::pluck('id')->toArray();
+        return view('category.catedel',['category'=> $categories,'categoryID'=> $categoriesID]);
+    }
 
     public function ShowCategory(){
         return view('category.cate_home');
@@ -30,4 +36,11 @@ class CategoryController extends Controller
     
         //return $request->all();
     }
+
+    public function DeleteCategory(request $request){
+        $filecategory = $request->input('selection-cate');
+        DB::table('Categories')->where('name', $filecategory)->delete();
+        return 'yes';
+    }
+
 }
