@@ -23,5 +23,10 @@ Route::get('upload','UploadController@index');
 Route::post('store','UploadController@store');
 Route::get('show','UploadController@show');
 
-Route::get('file','FileController@showUploadForm')->name('upload.file');
+Route::get('file','FileController@index')->name('upload.file');
+//Route::get('file','FileController@showUploadForm')->name('upload.file');
 Route::post('file','FileController@storefile')->name('upload.file');
+
+
+Route::get('category','CategoryController@ShowCategory')->name('category.cate_home');
+Route::post('category','CategoryController@StoreCategory')->name('category.cate_home');

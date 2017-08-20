@@ -16,12 +16,15 @@
 <input type="file" name="file" id="">
 <br>
 เลือกหมวดหมู่
+
 <select class="form-control form-control-sm" name="selection-cate">
   <option value="none" selected>none</option>
   <option value="A">Cal 1</option>
   <option value="B">Cal 2</option>
   <option value="C">Cal 3</option>
 </select>
+
+
 <br>
 <input type="submit" value="Upload" class="btn btn-primary">
 
