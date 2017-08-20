@@ -34,9 +34,15 @@ return $request->image->storeAs('public','bank.jpg'); //save with name file
        /* $url =  Storage::url('bank.jpg');
         return "<img src='".$url."'/>"; แสดงงไฟล์*/
         
-        if (Storage::move('public/bank.jpg','new/bank.jpg')){
+       /* if (Storage::move('public/bank.jpg','new/bank.jpg')){
             return 'File Move';
+        }*/
+
+        if(Storage::delete('public/bitfumes.jpg')){
+            return 'File is deleted';
         }
+
+
 
     }
 }
