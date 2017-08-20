@@ -25,3 +25,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('upload','UploadController@index');
 Route::post('store','UploadController@store');
+Route::get('show','UploadController@show');
