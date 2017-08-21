@@ -13,10 +13,13 @@ class FileController extends Controller
     public function index(){
         //$category = DB::table('categories')->pluck('id','name');
        // $Category = categories::all()->pluck('name', 'id');
-        //return 'yes';
-        $categories = category::pluck('name','id')->toArray();
+        
+       //return $categories->fetch_array();
+       // $categories = category::pluck('name','id')->toArray();
        // return view('upload.file');
-    return view('upload.file',['category'=> $categories]);
+       $categories  =  DB::table('Categories')->get()->toArray();
+       $fileshow = DB::table('files')->get()->toArray();
+    return view('upload.file',['category'=> $categories,'filetoshow'=> $fileshow]);
     }
 
     public function showUploadForm(){
@@ -27,12 +30,21 @@ class FileController extends Controller
         if ($request->hasFile('file')){
             $filename =  $request->file->getClientOriginalName();//store file with original name
             $filesize =  $request->file->getClientSize();
+            $fileextension = $request->file->Extension();
+            $filenamefile =  md5($filename. time()).'.'.$fileextension;
             $filecategory = $request->input('selection-cate');
-            $request->file->storeAs('public/upload', $filename);//store file in folder upload
+            
+            $path = 'public/upload';
+            $request->file->storeAs($path, $filenamefile);//store file in folder upload
+            $filepath = $path.'/'.$filenamefile;
+
             $file = new File;
             $file->name =$filename;
             $file->size =$filesize;
             $file->category =$filecategory;
+            $file->nameoffile =$filenamefile;
+            $file->path =$filepath;            
+
             $file->save();
 
             

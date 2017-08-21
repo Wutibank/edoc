@@ -10,9 +10,8 @@ class CategoryController extends Controller
 {
     //
     public function IndexCategory(){
-         $categories = category::pluck('name')->toArray();
-         $categoriesID = category::pluck('id')->toArray();
-        return view('category.catedel',['category'=> $categories,'categoryID'=> $categoriesID]);
+        $categories  =  DB::table('Categories')->get()->toArray();
+        return view('category.catedel',['category'=> $categories]);
     }
 
     public function ShowCategory(){
@@ -39,8 +38,16 @@ class CategoryController extends Controller
 
     public function DeleteCategory(request $request){
         $filecategory = $request->input('selection-cate');
-        DB::table('Categories')->where('name', $filecategory)->delete();
-        return 'yes';
+        $countofFile = DB::table('Categories')->where('id', $filecategory)->value('countFile');
+        if(($countofFile) < 1){ //Check ว่ามีไฟล์ที่จัดในหมวดนี้หรือไม่
+            DB::table('Categories')->where('id', $filecategory)->delete();
+            return 'yes';
+        }
+        else{
+        return 'the category is have file';
+        }
+
+        
     }
 
 }

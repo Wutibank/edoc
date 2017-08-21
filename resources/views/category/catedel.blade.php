@@ -19,7 +19,7 @@
       <label for="namecatego">ชื่อหมวดหมู่</label> 
      <select class="form-control form-control-sm" name="selection-cate">
     @foreach($category as $value )
-     <option value="{{ $value }}">{{ $value }}</option>
+     <option value="{{ $value->id }}">{{ $value->name }}</option>
     @endforeach
 </select>
       <br> 

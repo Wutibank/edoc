@@ -13,14 +13,12 @@ class UploadController extends Controller
     }
 
     public function store(request $request){
-        //return 'this is store funtion';
+        //return 'this is store function';
         if ($request->hasFile('image')){
        $request->file('image');
-      // return $request->image->store('public');
-      // return $request->image->extention(); นามสกุลของไฟล์
-return $request->image->storeAs('public','bank.jpg'); //save with name file
 
-    //return Storage::putFile('public/new',$request->file('image'));
+        return $request->image->storeAs('public','bank.jpg'); //save with name file
+
     }else{
         return view('upload.upload');
     }
