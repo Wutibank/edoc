@@ -24,7 +24,7 @@ Route::post('store','UploadController@store');
 Route::get('show','UploadController@show');
 
 Route::get('file','FileController@index')->name('upload.file')->middleware('auth');
-//Route::get('file','FileController@showUploadForm')->name('upload.file');
+Route::get('file/show','FileController@showFile')->name('upload.showFile')->middleware('auth');
 Route::post('file','FileController@storefile')->name('upload.file')->middleware('auth');
 Route::get('file/{file_id}/del', 'FileController@delFile');
 

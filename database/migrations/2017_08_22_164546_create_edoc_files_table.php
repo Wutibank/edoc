@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateEdocFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('edoc_files', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('detail');
-            $table->string('color');
+            $table->string('nameoffile');
+            $table->string('size');
+            $table->string('category');
+            $table->string('path');
+            $table->date('expire');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('edoc_files');
     }
 }

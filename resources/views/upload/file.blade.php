@@ -1,44 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main') @section('content')
+<br>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
 
-</head>
-
-<body>
+<div class="hero-body">
+    <div class="container">
+    <a class="button is-outlined" href="/file">File Upload</a>
+    <a class="button is-outlined" href="/file/show">File Show</a>
     <br>
 
-    <div class="hero-body">
-        <div class="container">
-            @if ($delisFinish == 1)
-            <div class="columns">
-                <div class="column">
-                    <div class="notification is-success">
-                        <a href="/file" class="delete"></a>ระบบได้ลบไฟล์เรียบร้อยแล้ว
-                    </div>
+        @if ($delisFinish == 1)
+        <div class="columns">
+            <div class="column">
+                <div class="notification is-success">
+                    <a href="/file" class="delete"></a>ระบบได้ลบไฟล์เรียบร้อยแล้ว
                 </div>
             </div>
-            @endif
+        </div>
+        @endif
 
-            <div class="columns">
-                <div class="column">
-                    <h1 class="title">File Upload</h1>
-                </div>
+        
+
+        <div class="columns">
+            <div class="column">
+            <br>
+                <h1 class="title">File Upload</h1>
             </div>
+        </div>
 
-            <div class="columns">
-                <div class="column">
-                    <form action="{{route('upload.file')}}" enctype="multipart/form-data" method="post">
-                        {{csrf_field()}}
-                        <div class="field">
-                            <div class="file is-medium is-boxed has-name is-fullwidth">
-                                <label class="file-label">
+        <div class="columns">
+            <div class="column">
+                <form action="{{route('upload.file')}}" enctype="multipart/form-data" method="post">
+                    {{csrf_field()}}
+                    <div class="field">
+                        <div class="file is-medium is-boxed has-name is-fullwidth">
+                            <label class="file-label">
                             <input class="file-input" type="file" name="file" id="file">
                             <span class="file-cta">
                                 <span class="file-icon">
@@ -48,76 +43,76 @@
                             </span>
                             <span class="file-name has-text-centered" id="filename"> </span>
                             </label>
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="control">
-                            <div class="select">
-                                <select class="form-control form-control-sm" name="selection-cate">
+                    <div class="control">
+                        <div class="select">
+                            <select class="form-control form-control-sm" name="selection-cate">
                             @foreach($category as  $value)
                                 <option value="{{ $value->id }}">{{ $value->name }}</option>
                             @endforeach
                             </select>
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="column">
-                            <input type="submit" value="Upload" class="button is-primary">
-                        </div>
+                    <div class="column">
+                        <input type="submit" value="Upload" class="button is-primary">
+                    </div>
 
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
 
-    <div class="hero-body">
-        <div class="container">
-            <div class="columns">
-                <div class="column">
-                    <h1 class="title">Show File</h1>
-                </div>
+<div class="hero-body">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <h1 class="title">Show File</h1>
             </div>
-            <div class="columns">
-                <div class="column">
-                    <table class="table is-fullwidth">
-                        <thead>
-                            <tr>
-                                <th><abbr title="id">ID</abbr></th>
-                                <th>FileName</th>
-                                <th>Category</th>
-                                <th>Size</th>
-                                <th>Path</th>
-                                <th>Create Date</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th><abbr title="id">ID</abbr></th>
-                                <th>FileName</th>
-                                <th>Category</th>
-                                <th>Size</th>
-                                <th>Path</th>
-                                <th>Create Date</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th><abbr title="id">ID</abbr></th>
+                            <th>FileName</th>
+                            <th>Category</th>
+                            <th>Size</th>
+                            <th>Path</th>
+                            <th>Create Date</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th><abbr title="id">ID</abbr></th>
+                            <th>FileName</th>
+                            <th>Category</th>
+                            <th>Size</th>
+                            <th>Path</th>
+                            <th>Create Date</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
 
 
-                            @foreach($filetoshow as $fileshow)
-                            <tr>
-                                <th>{{ $fileshow->id }}</th>
-                                <td>{{ $fileshow->name }}</td>
-                                <td>
-                                    @foreach($category as $valuecate) @if ($valuecate->id == $fileshow->category) {{ $valuecate->name}} @endif @endforeach
-                                </td>
-                                <td>{{ $fileshow->size }}</td>
-                                <td><a href="{{ asset('storage/'.$fileshow->path)}}">{{$fileshow->path}}</a></td>
-                                <td>{{ $fileshow->created_at }}</td>
+                        @foreach($filetoshow as $fileshow)
+                        <tr>
+                            <th>{{ $fileshow->id }}</th>
+                            <td>{{ $fileshow->name }}</td>
+                            <td>
+                                @foreach($category as $valuecate) @if ($valuecate->id == $fileshow->category) {{ $valuecate->name}} @endif @endforeach
+                            </td>
+                            <td>{{ $fileshow->size }}</td>
+                            <td><a href="{{ asset('storage/'.$fileshow->path)}}">{{$fileshow->path}}</a></td>
+                            <td>{{ $fileshow->created_at }}</td>
 
-                                <td><a href="{{ url('/file/' . $fileshow->id . '/del') }}"><button class="delete"></button></a</td>
+                            <td><a href="{{ url('/file/' . $fileshow->id . '/del') }}"><button class="delete" onclick="myFunction()"></button></a</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -144,9 +139,30 @@
 
             }
         };
+
+    jQuery(document).ready(function($){
+	//open popup
+	$('.cd-popup-trigger').on('click', function(event){
+		event.preventDefault();
+		$('.cd-popup').addClass('is-visible');
+	});
+	
+	//close popup
+	$('.cd-popup').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button
+	$(document).keyup(function(event){
+    	if(event.which=='27'){
+    		$('.cd-popup').removeClass('is-visible');
+	    }
+    });
+});
+
     </script>
 
 
-</body>
-
-</html>
+@endsection

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use DB;
-use App\Category;
+use App\edoc_maincategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     //
     public function IndexCategory(){
-        $categories  =  DB::table('Categories')->get()->toArray();
+        $categories  =  DB::table('edoc_maincategories')->get()->toArray();
         return view('category.catedel',['category'=> $categories]);
     }
 
@@ -24,7 +24,7 @@ class CategoryController extends Controller
        $cate_color = $request->input('color_cate');
        $cate_detail = $request->input('detail_cate');
 
-       $cate = new Category;
+       $cate = new edoc_maincategory;
        $cate->name =$cate_name;
        $cate->color =$cate_color;
        $cate->detail =$cate_detail;
@@ -38,9 +38,9 @@ class CategoryController extends Controller
 
     public function DeleteCategory(request $request){
         $filecategory = $request->input('selection-cate');
-        $countofFile = DB::table('Categories')->where('id', $filecategory)->value('countFile');
+        $countofFile = DB::table('edoc_maincategories')->where('id', $filecategory)->value('countFile');
         if(($countofFile) < 1){ //Check ว่ามีไฟล์ที่จัดในหมวดนี้หรือไม่
-            DB::table('Categories')->where('id', $filecategory)->delete();
+            DB::table('edoc_maincategories')->where('id', $filecategory)->delete();
             return 'yes';
         }
         else{
