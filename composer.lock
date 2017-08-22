@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "adad1429a79af6c58b9ed68c50f1caf6",
+    "content-hash": "205c3a8452f1fd1dc4cfa135d2c4610c",
     "packages": [
         {
             "name": "aitor24/localizer",
@@ -1592,6 +1592,46 @@
             ],
             "description": "Social module for laralum",
             "time": "2017-06-14T03:24:02+00:00"
+        },
+        {
+            "name": "laralum/statistics",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laralum/Statistics.git",
+                "reference": "abe235aa99a37745e13c5e0e27e8467eaa41ffd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laralum/Statistics/zipball/abe235aa99a37745e13c5e0e27e8467eaa41ffd9",
+                "reference": "abe235aa99a37745e13c5e0e27e8467eaa41ffd9",
+                "shasum": ""
+            },
+            "require": {
+                "laralum/laralum": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laralum\\Statistics\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erik Campobadal",
+                    "email": "soc@erik.cat"
+                },
+                {
+                    "name": "Aitor Riba",
+                    "email": "contact@aitorriba.com"
+                }
+            ],
+            "description": "Statistics module for laralum",
+            "time": "2017-05-27T18:07:34+00:00"
         },
         {
             "name": "laralum/tickets",

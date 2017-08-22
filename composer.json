@@ -11,6 +11,7 @@
         "laralum/laralum": "^1.1",
         "laralum/routes": "^1.0",
         "laralum/social": "^1.0",
+        "laralum/statistics": "^1.2",
         "laralum/tickets": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",

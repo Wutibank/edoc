@@ -11,41 +11,121 @@
 
 </head>
 
-<body><br>
+<body>
+    <br>
 
-<div class="row">
-<div class="container">
-    <div class="col-lg-offset-4 col-lg-12">
-        <p style="text-align:center;"> File Upload</p>
-        <form action="{{route('upload.file')}}" enctype="multipart/form-data" method="post">
-            {{csrf_field()}}
-            <input type="file" name="file" id="">
+    <div class="hero-body">
+        <div class="container">
+            @if ($delisFinish == 1)
+            <div class="columns">
+                <div class="column">
+                    <div class="notification is-success">
+                        <a href="/file" class="delete"></a>ระบบได้ลบไฟล์เรียบร้อยแล้ว
+                    </div>
+                </div>
+            </div>
+            @endif
 
-            <br>
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title">File Upload</h1>
+                </div>
+            </div>
 
+            <div class="columns">
+                <div class="column">
+                    <form action="{{route('upload.file')}}" enctype="multipart/form-data" method="post">
+                        {{csrf_field()}}
+                        <div class="field">
+                            <div class="file is-medium is-boxed has-name is-fullwidth">
+                                <label class="file-label">
+                            <input class="file-input" type="file" name="file" id="file">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fa fa-upload"></i>
+                                </span>
+                                <span class="file-label has-text-centered">Select file …</span>
+                            </span>
+                            <span class="file-name has-text-centered" id="filename"> </span>
+                            </label>
+                            </div>
+                        </div>
 
-            <select class="form-control form-control-sm" name="selection-cate">
-    @foreach($category as  $value)
-     <option value="{{ $value->id }}">{{ $value->name }}</option>
-    @endforeach
-</select>
+                        <div class="control">
+                            <div class="select">
+                                <select class="form-control form-control-sm" name="selection-cate">
+                            @foreach($category as  $value)
+                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                            @endforeach
+                            </select>
+                            </div>
+                        </div>
 
-            <br>
-            <input type="submit" value="Upload" class="btn btn-primary">
+                        <div class="column">
+                            <input type="submit" value="Upload" class="button is-primary">
+                        </div>
 
-        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-<div>
-<p style="text-align:center;">Show File</p>
-@foreach($filetoshow as  $fileshow)
-     {{ $fileshow->name }}
-
-    @endforeach
 
 
 
-</div>
-<div>
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title">Show File</h1>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <table class="table is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th><abbr title="id">ID</abbr></th>
+                                <th>FileName</th>
+                                <th>Category</th>
+                                <th>Size</th>
+                                <th>Path</th>
+                                <th>Create Date</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th><abbr title="id">ID</abbr></th>
+                                <th>FileName</th>
+                                <th>Category</th>
+                                <th>Size</th>
+                                <th>Path</th>
+                                <th>Create Date</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+
+
+                            @foreach($filetoshow as $fileshow)
+                            <tr>
+                                <th>{{ $fileshow->id }}</th>
+                                <td>{{ $fileshow->name }}</td>
+                                <td>
+                                    @foreach($category as $valuecate) @if ($valuecate->id == $fileshow->category) {{ $valuecate->name}} @endif @endforeach
+                                </td>
+                                <td>{{ $fileshow->size }}</td>
+                                <td><a href="{{ asset('storage/'.$fileshow->path)}}">{{$fileshow->path}}</a></td>
+                                <td>{{ $fileshow->created_at }}</td>
+
+                                <td><a href="{{ url('/file/' . $fileshow->id . '/del') }}"><button class="delete"></button></a</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -53,7 +133,20 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
         crossorigin="anonymous"></script>
-    
+
+
+    <script>
+        var file = document.getElementById("file");
+        file.onchange = function () {
+            if (file.files.length > 0) {
+
+                document.getElementById('filename').innerHTML = file.files[0].name;
+
+            }
+        };
+    </script>
+
+
 </body>
 
 </html>
