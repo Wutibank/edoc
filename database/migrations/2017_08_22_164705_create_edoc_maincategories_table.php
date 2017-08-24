@@ -18,6 +18,7 @@ class CreateEdocMaincategoriesTable extends Migration
             $table->string('name');
             $table->string('detail');
             $table->string('color');
+            $table->integer('countFile')->unsigned();
             $table->timestamps();
         });
     }

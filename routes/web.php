@@ -24,11 +24,13 @@ Route::post('store','UploadController@store');
 Route::get('show','UploadController@show');
 
 Route::get('file','FileController@index')->name('upload.file')->middleware('auth');
-Route::get('file/show','FileController@showFile')->name('upload.showFile')->middleware('auth');
 Route::post('file','FileController@storefile')->name('upload.file')->middleware('auth');
-Route::get('file/{file_id}/del', 'FileController@delFile');
+Route::get('file/show','FileController@showFile')->name('upload.showFile')->middleware('auth');
+Route::get('file/{file_id}/delete', 'FileController@deleteFile');
 
-Route::get('category','CategoryController@ShowCategory')->name('category.cate_home');
-Route::post('category','CategoryController@StoreCategory')->name('category.cate_home');
-Route::get('catedel', 'CategoryController@IndexCategory')->name('category.catedel');
-Route::post('catedel', 'CategoryController@DeleteCategory')->name('category.catedel');
+Route::get('category','CategoryController@ShowCategory')->name('category.categoryHome');
+Route::post('category','CategoryController@StoreCategory')->name('category.categoryHome');
+Route::get('category/show','CategoryController@ShowListCategory')->name('category.categoryShow');
+
+Route::get('category/delete', 'CategoryController@IndexCategory')->name('category.categoryDelete');
+Route::post('category/delete', 'CategoryController@DeleteCategory')->name('category.categoryDelete');

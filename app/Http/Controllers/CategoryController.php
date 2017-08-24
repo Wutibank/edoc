@@ -11,11 +11,23 @@ class CategoryController extends Controller
     //
     public function IndexCategory(){
         $categories  =  DB::table('edoc_maincategories')->get()->toArray();
-        return view('category.catedel',['category'=> $categories]);
+        return view('category.categoryHome',['category'=> $categories]);
     }
 
     public function ShowCategory(){
-        return view('category.cate_home');
+        $category  =  DB::table('edoc_maincategories')->get()->toArray();
+        return view('category.categoryHome',compact('category'));
+    }
+
+    public function ShowListCategory(){
+        $category  =  DB::table('edoc_maincategories')->get()->toArray();
+        return view('category.categoryShow',compact('category'));
+    }
+
+    public function EditCategory($id){
+        //$category  =  DB::table('edoc_maincategories')->get()->toArray();
+        $category = edoc_maincategories::find($id);
+        return view('category.categoryEdit',compact('category'));
     }
 
     public function StoreCategory(request $request){
@@ -28,9 +40,10 @@ class CategoryController extends Controller
        $cate->name =$cate_name;
        $cate->color =$cate_color;
        $cate->detail =$cate_detail;
+       $cate->countFile = 0;
        $cate->save();
 
-        
+       return $this->IndexCategory();
        return 'yes';
     
         //return $request->all();

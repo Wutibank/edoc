@@ -106,13 +106,19 @@
                             <th>{{ $fileshow->id }}</th>
                             <td>{{ $fileshow->name }}</td>
                             <td>
-                                @foreach($category as $valuecate) @if ($valuecate->id == $fileshow->category) {{ $valuecate->name}} @endif @endforeach
+                                @foreach($category as $valuecate) 
+                                
+                                @if ($valuecate->id == $fileshow->category) 
+                                <i class="fa fa-circle" style="color:#{{ $valuecate->color }};padding-right:5px;"></i>{{ $valuecate->name}} 
+                                @endif 
+                                
+                                @endforeach
                             </td>
                             <td>{{ $fileshow->size }}</td>
                             <td><a href="{{ asset('storage/'.$fileshow->path)}}">{{$fileshow->path}}</a></td>
                             <td>{{ $fileshow->created_at }}</td>
 
-                            <td><a href="{{ url('/file/' . $fileshow->id . '/del') }}"><button class="delete" onclick="myFunction()"></button></a</td>
+                            <td><a href="{{ url('/file/' . $fileshow->id . '/delete') }}"><button class="delete" onclick="myFunction()"></button></a</td>
                             </tr>
                             @endforeach
                         </tbody>

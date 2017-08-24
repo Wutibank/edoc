@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\edoc_file;
-use App\Category;
+use App\edoc_maincategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,17 +50,15 @@ class FileController extends Controller
             $file->nameoffile =$filenamefile;
             $file->path =$filepath;     
             $file->expire ='2008-11-11';          
-
             $file->save();
 
+            
             return $this->index();
         }
         //return $request->all();
         return 'you are not select file';
     }
-    public function delFile($file_id){
-        
-        
+    public function deleteFile($file_id){
         
         $categories  =  DB::table('edoc_maincategories')->get()->toArray();
         $fileshow = DB::table('edoc_files')->get()->toArray();
